@@ -33,36 +33,48 @@ export default function ExportReportScreen({ plans }) {
       }}>
         <button onClick={() => navigate(-1)} style={{
           background: 'none', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '4px',
+          color: 'var(--brand-blue)',
         }}>
-          <IconArrowLeft size={24} />
+          <IconArrowLeft size={22} />
         </button>
-        <h1 style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: '18px',
-          fontWeight: 600,
+        <h1 className="heading-display" style={{
+          fontSize: '14px',
+          color: 'var(--brand-navy)',
         }}>Export Report</h1>
       </div>
 
-      <div style={{ padding: '20px 16px 100px' }}>
+      <div style={{ padding: '24px 16px 100px' }}>
         {/* Report header */}
         <div style={{
           textAlign: 'center',
-          paddingBottom: '20px',
-          marginBottom: '20px',
+          paddingBottom: '24px',
+          marginBottom: '24px',
           borderBottom: '1px solid var(--border)',
         }}>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: '20px',
-            fontWeight: 600,
+          <div className="brand-logo" style={{ fontSize: '24px', marginBottom: '12px', justifyContent: 'center', display: 'flex' }}>
+            <span className="dr">Dr</span>
+            <span className="hair">Hair</span>
+          </div>
+          <p style={{
+            fontSize: '9px',
+            color: 'var(--ui-gray-soft)',
+            letterSpacing: '2.5px',
+            textTransform: 'uppercase',
+            fontWeight: 500,
+            marginBottom: '20px',
+          }}>Medical Specialists in Hair</p>
+
+          <h2 className="heading-display" style={{
+            fontSize: '16px',
+            color: 'var(--brand-navy)',
             marginBottom: '16px',
           }}>
             {plan.name} — Progress Report
           </h2>
-          <div style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.8' }}>
-            <p><strong>Patient:</strong> {mockUser.name}</p>
-            <p><strong>Date Range:</strong> {formatDate(plan.startDate)} – {formatDate(getEndDate(plan.startDate, plan.durationDays))}</p>
-            <p><strong>Doctor/Clinic:</strong> DrHair Medical Team</p>
+          <div style={{ fontSize: '12px', color: 'var(--ui-gray-dark)', lineHeight: '1.8' }}>
+            <p><strong style={{ color: 'var(--brand-navy)' }}>Patient:</strong> {mockUser.name}</p>
+            <p><strong style={{ color: 'var(--brand-navy)' }}>Date Range:</strong> {formatDate(plan.startDate)} – {formatDate(getEndDate(plan.startDate, plan.durationDays))}</p>
+            <p><strong style={{ color: 'var(--brand-navy)' }}>Doctor/Clinic:</strong> DrHair Medical Team</p>
           </div>
         </div>
 
@@ -73,32 +85,35 @@ export default function ExportReportScreen({ plans }) {
           gap: '12px',
         }}>
           {uploadedIntervals.map((interval, idx) => {
-            const colors = ['#0EA5E9', '#0369A1', '#7DD3FC']
-            const bg = colors[idx % 3]
+            const colors = ['#114D8E', '#0A8FD4', '#0284C8', '#367996']
+            const bg = colors[idx % colors.length]
             return (
               <div key={interval.id} style={{
                 border: '1px solid var(--border)',
-                borderRadius: '10px',
+                borderRadius: '12px',
                 overflow: 'hidden',
+                boxShadow: '0 2px 8px rgba(0,49,112,0.06)',
               }}>
                 <div style={{
                   width: '100%',
                   aspectRatio: '1',
-                  background: `linear-gradient(145deg, ${bg}, ${bg}dd)`,
+                  background: `linear-gradient(145deg, ${bg}, ${bg}cc)`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: 'white',
                 }}>
-                  <IconCamera size={40} />
+                  <IconCamera size={36} />
                 </div>
                 <div style={{
-                  padding: '8px 10px',
-                  fontSize: '12px',
-                  color: 'var(--text-muted)',
+                  padding: '10px 12px',
+                  fontSize: '11px',
+                  color: 'var(--ui-gray-dark)',
                   fontWeight: 500,
                   background: 'var(--surface-white)',
                   borderTop: '1px solid var(--border)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
                 }}>
                   Day {interval.day} — {interval.date}
                 </div>
@@ -116,7 +131,7 @@ export default function ExportReportScreen({ plans }) {
         background: 'var(--surface-white)',
         borderTop: '1px solid var(--border)',
       }}>
-        <button className="btn btn-primary btn-block" onClick={handleExport} style={{ fontSize: '15px' }}>
+        <button className="btn btn-primary btn-block" onClick={handleExport}>
           Export as PDF
         </button>
       </div>

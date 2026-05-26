@@ -75,16 +75,16 @@ export default function CreatePlanSheet({ onClose, onCreate }) {
         {/* Handle bar */}
         <div style={{
           width: '40px', height: '4px', borderRadius: '2px',
-          background: '#D1D0CB', margin: '0 auto 20px',
+          background: 'var(--ui-gray-soft)', opacity: 0.4, margin: '0 auto 20px',
         }} />
 
-        <h2 style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: '20px',
-          fontWeight: 600,
-          marginBottom: '20px',
-          textAlign: 'center',
-        }}>Create Treatment Plan</h2>
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <p className="eyebrow" style={{ marginBottom: '6px' }}>New Programme</p>
+          <h2 className="heading-display" style={{
+            fontSize: '18px',
+            color: 'var(--brand-navy)',
+          }}>Create Treatment Plan</h2>
+        </div>
 
         {/* Form */}
         <div style={{ marginBottom: '14px' }}>
@@ -134,7 +134,7 @@ export default function CreatePlanSheet({ onClose, onCreate }) {
               onChange={e => update('intervalDays', e.target.value)}
               style={{ width: '100px', flex: 'none' }}
             />
-            <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: 500 }}>Days</span>
+            <span style={{ fontSize: '13px', color: 'var(--ui-gray-dark)', fontWeight: 500 }}>Days</span>
           </div>
         </div>
 
@@ -168,10 +168,10 @@ export default function CreatePlanSheet({ onClose, onCreate }) {
 
 const labelStyle = {
   display: 'block',
-  fontSize: '12px',
-  fontWeight: 600,
-  color: 'var(--text-muted)',
-  marginBottom: '6px',
+  fontSize: '10px',
+  fontWeight: 500,
+  color: 'var(--ui-gray-dark)',
+  marginBottom: '8px',
   textTransform: 'uppercase',
-  letterSpacing: '0.5px',
+  letterSpacing: '1.5px',
 }

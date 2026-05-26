@@ -11,27 +11,42 @@ export default function SignupScreen() {
     <div className="screen-enter" style={{
       width: '100%',
       height: '100%',
-      background: 'var(--bg-light)',
+      background: 'var(--off-white)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      padding: '50px 24px 40px',
+      padding: '56px 24px 40px',
       overflowY: 'auto',
     }}>
-      <div style={{ marginBottom: '36px', textAlign: 'center' }}>
-        <h1 style={{
-          fontFamily: "var(--font-heading)",
-          fontSize: '40px',
-          fontWeight: 700,
-          color: 'var(--primary-blue)',
-          marginBottom: '4px',
-        }}>DrHair</h1>
+      <div style={{ marginBottom: '12px', textAlign: 'center' }}>
+        <div className="brand-logo" style={{ fontSize: '40px', marginBottom: '6px' }}>
+          <span className="dr">Dr</span>
+          <span className="hair">Hair</span>
+        </div>
         <p style={{
-          fontSize: '12px',
-          color: 'var(--text-muted)',
+          fontSize: '9px',
+          color: 'var(--ui-gray-soft)',
           letterSpacing: '3px',
           textTransform: 'uppercase',
-        }}>Create Account</p>
+          fontWeight: 500,
+        }}>Medical Specialists in Hair</p>
+      </div>
+
+      <div style={{
+        textAlign: 'center',
+        marginBottom: '28px',
+        marginTop: '16px',
+      }}>
+        <h2 className="heading-display" style={{
+          fontSize: '18px',
+          color: 'var(--brand-navy)',
+          marginBottom: '6px',
+        }}>
+          Kickstart Your Growth
+        </h2>
+        <p style={{ fontSize: '12px', color: 'var(--ui-gray-dark)' }}>
+          Assessment takes 1 minute
+        </p>
       </div>
 
       <div style={{ width: '100%', maxWidth: '360px' }}>
@@ -50,20 +65,20 @@ export default function SignupScreen() {
         <button
           className="btn btn-primary btn-block"
           onClick={() => navigate('/home')}
-          style={{ fontSize: '16px', padding: '16px' }}
+          style={{ padding: '16px' }}
         >
-          Create Account
+          Get Started
         </button>
 
         <p style={{
           textAlign: 'center',
           marginTop: '24px',
-          fontSize: '14px',
-          color: 'var(--text-muted)',
+          fontSize: '13px',
+          color: 'var(--ui-gray-dark)',
         }}>
           Already have an account?{' '}
           <Link to="/login" style={{
-            color: 'var(--primary-gold)',
+            color: 'var(--brand-blue)',
             textDecoration: 'none',
             fontWeight: 600,
           }}>Login</Link>
@@ -75,10 +90,10 @@ export default function SignupScreen() {
 
 const labelStyle = {
   display: 'block',
-  fontSize: '13px',
-  fontWeight: 600,
-  color: 'var(--text-muted)',
-  marginBottom: '6px',
+  fontSize: '10px',
+  fontWeight: 500,
+  color: 'var(--ui-gray-dark)',
+  marginBottom: '8px',
   textTransform: 'uppercase',
-  letterSpacing: '0.5px',
+  letterSpacing: '1.5px',
 }

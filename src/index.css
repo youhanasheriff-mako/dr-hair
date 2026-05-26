@@ -1,23 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary-dark: #0F172A; /* Deep Slate Blue */
-  --primary-blue: #0EA5E9; /* Sky Blue */
-  --primary-light: #F0F9FF; /* Light Sky Blue */
-  --accent-teal: #0D9488;
-  --bg-light: #F8FAFC;
+  /* Brand Primary Colours */
+  --brand-navy: #003170;       /* Deepest navy */
+  --brand-blue: #114D8E;       /* Primary brand blue */
+  --brand-blue-bright: #0A8FD4;
+  --brand-blue-sky: #0284C8;
+  --brand-blue-muted: #5890A8;
+  --brand-blue-teal: #367996;
+
+  /* UI Colours */
+  --ui-gray-dark: #575757;
+  --ui-gray-soft: #7F97B7;
+
+  /* Accent Colours */
+  --accent-pink: #DF3B85;
+  --accent-pink-soft: #FFE2EF;
+
+  /* Off whites */
+  --off-white: #F6FCFE;
+  --off-white-blue: #CEE9F6;
+
+  /* Semantic tokens */
+  --primary-dark: var(--brand-navy);
+  --primary-blue: var(--brand-blue);
+  --primary-light: var(--off-white-blue);
+  --accent-teal: var(--brand-blue-teal);
+  --bg-light: var(--off-white);
   --surface-white: #FFFFFF;
-  --text-primary: #0F172A;
-  --text-muted: #64748B;
-  --danger: #EF4444;
-  --success: #22C55E;
-  --border: #E2E8F0;
-  --font-heading: 'Bodoni Moda', serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-/* For backward compatibility with components using variables directly */
-:root {
-  --primary-gold: var(--primary-blue);
+  --text-primary: #0E1F38;
+  --text-muted: var(--ui-gray-dark);
+  --text-soft: var(--ui-gray-soft);
+  --danger: #DF3B85;
+  --success: #2A9D8F;
+  --warning: #F59E0B;
+  --border: #DCE7F0;
+
+  /* Backward compatibility */
+  --primary-gold: var(--brand-blue);
+
+  /* Typography */
+  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
@@ -35,7 +59,7 @@ html, body, #root {
 
 body {
   font-family: var(--font-body);
-  background: #E8E5DF;
+  background: #CEE9F6;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -58,7 +82,7 @@ body {
   .app-shell {
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
-    box-shadow: 0 0 40px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 60px rgba(0, 49, 112, 0.18);
   }
 }
 
@@ -129,7 +153,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 49, 112, 0.45);
   z-index: 100;
   animation: fadeIn 0.25s ease;
   display: flex;
@@ -141,7 +165,7 @@ body {
   width: 100%;
   max-width: 430px;
   background: var(--surface-white);
-  border-radius: 20px 20px 0 0;
+  border-radius: 24px 24px 0 0;
   padding: 24px 20px 32px;
   animation: slideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   max-height: 85vh;
@@ -159,7 +183,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 49, 112, 0.55);
   z-index: 200;
   animation: fadeIn 0.2s ease;
   display: flex;
@@ -172,9 +196,10 @@ body {
   width: 100%;
   max-width: 380px;
   background: var(--surface-white);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 28px 24px;
   animation: fadeSlideIn 0.3s ease;
+  box-shadow: 0 12px 48px rgba(0, 49, 112, 0.25);
 }
 
 /* Toast */
@@ -183,15 +208,16 @@ body {
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--primary-dark);
+  background: var(--brand-navy);
   color: white;
   padding: 12px 24px;
   border-radius: 50px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   z-index: 300;
   animation: fadeSlideIn 0.3s ease;
   white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0, 49, 112, 0.3);
 }
 
 /* Input styles */
@@ -204,18 +230,25 @@ textarea,
 select {
   width: 100%;
   padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--text-primary);
   background: var(--surface-white);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--primary-gold);
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(17, 77, 142, 0.12);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--ui-gray-soft);
+  font-weight: 400;
 }
 
 textarea {
@@ -231,8 +264,10 @@ textarea {
   padding: 14px 28px;
   border-radius: 50px;
   font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
   border: none;
   cursor: pointer;
   transition: all 0.2s;
@@ -244,34 +279,46 @@ textarea {
 }
 
 .btn-primary {
-  background: var(--primary-gold);
+  background: var(--brand-blue);
   color: var(--surface-white);
+  box-shadow: 0 4px 14px rgba(17, 77, 142, 0.28);
 }
 
 .btn-primary:hover {
-  background: #b8993f;
+  background: var(--brand-navy);
+}
+
+.btn-secondary {
+  background: var(--brand-blue-bright);
+  color: var(--surface-white);
+  box-shadow: 0 4px 14px rgba(10, 143, 212, 0.28);
+}
+
+.btn-accent {
+  background: var(--accent-pink);
+  color: var(--surface-white);
+  box-shadow: 0 4px 14px rgba(223, 59, 133, 0.28);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--text-primary);
-  border: 1.5px solid var(--border);
+  color: var(--brand-blue);
+  border: 1.5px solid var(--brand-blue);
 }
 
 .btn-outline:hover {
-  border-color: var(--primary-gold);
-  color: var(--primary-gold);
+  background: var(--off-white-blue);
 }
 
 .btn-danger {
   background: transparent;
-  color: var(--danger);
-  border: 1.5px solid var(--danger);
+  color: var(--accent-pink);
+  border: 1.5px solid var(--accent-pink);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--text-muted);
+  color: var(--ui-gray-dark);
   padding: 14px 20px;
 }
 
@@ -283,9 +330,9 @@ textarea {
 .card {
   background: var(--surface-white);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 49, 112, 0.05);
 }
 
 /* Badge */
@@ -293,44 +340,44 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 50px;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .badge-green {
-  background: #E8F5E9;
+  background: rgba(42, 157, 143, 0.12);
   color: var(--success);
 }
 
 .badge-teal {
-  background: #E0F2F1;
-  color: var(--accent-teal);
+  background: var(--off-white-blue);
+  color: var(--brand-blue-teal);
 }
 
 .badge-amber {
-  background: #FFF8E1;
-  color: #F59E0B;
+  background: #FFF4DC;
+  color: #B97500;
 }
 
 .badge-red {
-  background: #FEECEC;
-  color: var(--danger);
+  background: var(--accent-pink-soft);
+  color: var(--accent-pink);
 }
 
 .badge-blue {
-  background: #E3F2FD;
-  color: #2196F3;
+  background: var(--off-white-blue);
+  color: var(--brand-blue);
 }
 
 /* Progress bar */
 .progress-bar-track {
   width: 100%;
   height: 6px;
-  background: #ECEAE5;
+  background: var(--off-white-blue);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -338,7 +385,7 @@ textarea {
 .progress-bar-fill {
   height: 100%;
   border-radius: 3px;
-  background: var(--primary-blue);
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-blue-bright));
   transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -347,7 +394,7 @@ textarea {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--primary-blue);
+  background: var(--accent-pink);
   animation: pulse 1.5s ease infinite;
   display: inline-block;
 }
@@ -357,7 +404,7 @@ textarea {
   position: relative;
   width: 48px;
   height: 28px;
-  background: #CBD5E1;
+  background: var(--ui-gray-soft);
   border-radius: 14px;
   cursor: pointer;
   transition: background 0.3s;
@@ -365,7 +412,7 @@ textarea {
 }
 
 .toggle-switch.active {
-  background: var(--primary-blue);
+  background: var(--brand-blue);
 }
 
 .toggle-switch::after {
@@ -378,9 +425,45 @@ textarea {
   background: white;
   border-radius: 50%;
   transition: transform 0.3s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 3px rgba(0, 49, 112, 0.2);
 }
 
 .toggle-switch.active::after {
   transform: translateX(20px);
+}
+
+/* Brand utility classes */
+.heading-display {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ui-gray-soft);
+}
+
+/* DrHair logo lockup */
+.brand-logo {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.brand-logo .dr {
+  color: var(--brand-navy);
+}
+
+.brand-logo .hair {
+  color: var(--brand-blue-bright);
 }

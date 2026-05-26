@@ -16,7 +16,7 @@ export default function PlanDetailScreen({ plans, onUpload }) {
   const offset = circumference - (plan.progress / 100) * circumference
 
   return (
-    <div className="screen-content screen-enter" style={{ paddingBottom: '20px' }}>
+    <div className="screen-content screen-enter" style={{ paddingBottom: '20px', background: 'var(--off-white)' }}>
       {/* Header */}
       <div style={{
         display: 'flex',
@@ -32,26 +32,27 @@ export default function PlanDetailScreen({ plans, onUpload }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <button onClick={() => navigate('/home')} style={{
             background: 'none', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '4px',
+            color: 'var(--brand-blue)',
           }}>
-            <IconArrowLeft size={24} />
+            <IconArrowLeft size={22} />
           </button>
-          <h1 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: '18px',
-            fontWeight: 600,
+          <h1 className="heading-display" style={{
+            fontSize: '14px',
+            color: 'var(--brand-navy)',
           }}>{plan.name}</h1>
         </div>
         <div style={{ position: 'relative' }}>
           <button onClick={() => setShowMenu(!showMenu)} style={{
             background: 'none', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '4px 8px',
+            color: 'var(--brand-blue)',
           }}>
-            <IconMore size={24} />
+            <IconMore size={22} />
           </button>
           {showMenu && (
             <div style={{
               position: 'absolute', right: 0, top: '36px',
               background: 'var(--surface-white)', border: '1px solid var(--border)',
-              borderRadius: '10px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+              borderRadius: '12px', boxShadow: '0 8px 24px rgba(0,49,112,0.15)',
               minWidth: '180px', zIndex: 20, overflow: 'hidden',
             }}>
               {['Edit Plan', 'Export Report', 'Delete Plan'].map((item, i) => (
@@ -61,10 +62,11 @@ export default function PlanDetailScreen({ plans, onUpload }) {
                 }} style={{
                   display: 'block', width: '100%', padding: '13px 16px',
                   background: 'none', border: 'none', textAlign: 'left',
-                  fontSize: '14px', cursor: 'pointer',
-                  color: item === 'Delete Plan' ? 'var(--danger)' : 'var(--text-primary)',
+                  fontSize: '13px', cursor: 'pointer',
+                  color: item === 'Delete Plan' ? 'var(--accent-pink)' : 'var(--text-primary)',
                   borderTop: i > 0 ? '1px solid var(--border)' : 'none',
                   fontFamily: 'var(--font-body)',
+                  fontWeight: 500,
                 }}>{item}</button>
               ))}
             </div>
@@ -73,38 +75,50 @@ export default function PlanDetailScreen({ plans, onUpload }) {
       </div>
 
       {/* Progress Overview */}
-      <div className="card" style={{ margin: '16px', padding: '24px', textAlign: 'center' }}>
-        <svg width="100" height="100" style={{ transform: 'rotate(-90deg)', marginBottom: '12px' }}>
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#F1F5F9" strokeWidth="8" />
-          <circle cx="50" cy="50" r="44" fill="none" stroke="var(--primary-blue)" strokeWidth="8"
-            strokeDasharray={circumference} strokeDashoffset={offset}
+      <div className="card" style={{
+        margin: '16px',
+        padding: '28px 20px',
+        textAlign: 'center',
+        background: 'linear-gradient(160deg, #FFFFFF 0%, #F6FCFE 100%)',
+      }}>
+        <svg width="120" height="120" style={{ transform: 'rotate(-90deg)', marginBottom: '12px' }}>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="#CEE9F6" strokeWidth="8" />
+          <circle cx="60" cy="60" r="52" fill="none" stroke="url(#progressGradient)" strokeWidth="8"
+            strokeDasharray={2 * Math.PI * 52}
+            strokeDashoffset={2 * Math.PI * 52 - (plan.progress / 100) * (2 * Math.PI * 52)}
             strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.8s ease' }}
           />
-          <text x="50" y="50" fill="var(--text-primary)" fontSize="18" fontWeight="700"
+          <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#114D8E" />
+              <stop offset="100%" stopColor="#0A8FD4" />
+            </linearGradient>
+          </defs>
+          <text x="60" y="60" fill="var(--brand-navy)" fontSize="22" fontWeight="700"
             textAnchor="middle" dominantBaseline="central"
             style={{ transform: 'rotate(90deg)', transformOrigin: '50% 50%', fontFamily: 'var(--font-body)' }}
           >
             {plan.progress}%
           </text>
         </svg>
-        <p style={{ fontSize: '15px', fontWeight: 600, marginBottom: '4px' }}>
+        <p className="heading-display" style={{ fontSize: '14px', color: 'var(--brand-navy)', marginBottom: '6px' }}>
           Day {plan.intervals.filter(i => i.status === 'uploaded').length * plan.intervalDays} of {plan.durationDays}
         </p>
-        <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '12px', color: 'var(--ui-gray-dark)' }}>
           {plan.completedIntervals} of {plan.totalIntervals} intervals completed
         </p>
-        <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '8px' }}>
+        <p style={{ fontSize: '11px', color: 'var(--ui-gray-soft)', marginTop: '8px', letterSpacing: '0.5px' }}>
           {formatDate(plan.startDate)} → {formatDate(getEndDate(plan.startDate, plan.durationDays))}
         </p>
       </div>
 
       {/* Timeline */}
       <div style={{ padding: '0 16px' }}>
-        <h2 style={{
-          fontFamily: "var(--font-heading)",
-          fontSize: '18px',
-          fontWeight: 600,
+        <h2 className="heading-display" style={{
+          fontSize: '12px',
+          color: 'var(--brand-navy)',
           marginBottom: '14px',
+          letterSpacing: '2px',
         }}>Progress Timeline</h2>
 
         {plan.intervals.map((interval, idx) => (
@@ -134,10 +148,10 @@ export default function PlanDetailScreen({ plans, onUpload }) {
 
 function TimelineItem({ interval, isLast, onUpload }) {
   const config = {
-    uploaded: { bg: '#F0FAF0', border: '#27AE60', icon: IconCheck, label: 'Uploaded' },
-    due: { bg: '#FFF8E1', border: '#F59E0B', icon: IconAlert, label: 'Due Today' },
-    missed: { bg: '#FEECEC', border: '#C0392B', icon: IconAlert, label: 'Missed' },
-    locked: { bg: '#F5F4F0', border: '#D1D0CB', icon: IconLock, label: 'Not yet due' },
+    uploaded: { bg: 'rgba(42,157,143,0.08)', border: 'var(--success)', icon: IconCheck, label: 'Uploaded' },
+    due: { bg: 'var(--accent-pink-soft)', border: 'var(--accent-pink)', icon: IconAlert, label: 'Due Today' },
+    missed: { bg: 'var(--accent-pink-soft)', border: 'var(--accent-pink)', icon: IconAlert, label: 'Missed' },
+    locked: { bg: 'var(--off-white-blue)', border: 'var(--ui-gray-soft)', icon: IconLock, label: 'Not yet due' },
   }
   const c = config[interval.status] || config.locked
   const StatusIcon = c.icon
@@ -149,8 +163,9 @@ function TimelineItem({ interval, isLast, onUpload }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', width: '24px',
       }}>
         <div style={{
-          width: '10px', height: '10px', borderRadius: '50%',
-          background: c.border, flexShrink: 0, marginTop: '6px',
+          width: '12px', height: '12px', borderRadius: '50%',
+          background: c.border, flexShrink: 0, marginTop: '8px',
+          boxShadow: interval.status === 'due' ? '0 0 0 4px rgba(223,59,133,0.18)' : 'none',
         }} />
         {!isLast && <div style={{
           width: '2px', flex: 1, background: 'var(--border)', marginTop: '4px',
@@ -159,38 +174,38 @@ function TimelineItem({ interval, isLast, onUpload }) {
 
       {/* Content */}
       <div style={{
-        flex: 1, marginBottom: '12px', padding: '12px 14px',
+        flex: 1, marginBottom: '12px', padding: '14px 16px',
         background: c.bg, borderLeft: `3px solid ${c.border}`,
-        borderRadius: '0 10px 10px 0',
-        opacity: interval.status === 'locked' ? 0.6 : 1,
+        borderRadius: '0 12px 12px 0',
+        opacity: interval.status === 'locked' ? 0.65 : 1,
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', fontWeight: 600, color: c.border }}>
-            <StatusIcon size={16} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 600, color: c.border, textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <StatusIcon size={14} />
             <span>Day {interval.day}</span>
           </div>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{interval.date}</span>
+          <span style={{ fontSize: '11px', color: 'var(--ui-gray-dark)' }}>{interval.date}</span>
         </div>
 
         {interval.status === 'uploaded' && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
             <div style={{
-              width: '36px', height: '36px', borderRadius: '6px',
-              background: `linear-gradient(135deg, #0EA5E9, #38BDF8)`,
+              width: '36px', height: '36px', borderRadius: '8px',
+              background: 'linear-gradient(135deg, #114D8E, #0A8FD4)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: 'white',
             }}>
-              <IconCamera size={20} />
+              <IconCamera size={18} />
             </div>
-            <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Tap to view</span>
+            <span style={{ fontSize: '11px', color: 'var(--ui-gray-dark)' }}>Tap to view</span>
           </div>
         )}
 
         {interval.status === 'due' && (
           <button
-            className="btn btn-primary"
+            className="btn btn-accent"
             onClick={onUpload}
-            style={{ marginTop: '8px', padding: '8px 18px', fontSize: '13px' }}
+            style={{ marginTop: '10px', padding: '8px 18px', fontSize: '10px' }}
           >
             Upload Now
           </button>
@@ -198,19 +213,16 @@ function TimelineItem({ interval, isLast, onUpload }) {
 
         {interval.status === 'missed' && (
           <button
-            className="btn"
+            className="btn btn-accent"
             onClick={onUpload}
-            style={{
-              marginTop: '8px', padding: '8px 18px', fontSize: '13px',
-              background: 'var(--danger)', color: 'white',
-            }}
+            style={{ marginTop: '10px', padding: '8px 18px', fontSize: '10px' }}
           >
             Upload Late
           </button>
         )}
 
         {interval.status === 'locked' && (
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>Not yet due</p>
+          <p style={{ fontSize: '11px', color: 'var(--ui-gray-dark)', marginTop: '2px' }}>Not yet due</p>
         )}
       </div>
     </div>
